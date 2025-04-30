@@ -72,8 +72,7 @@ int main(void)
                     retryCount++;
                     delay_ms(RETRY_DELAY_MS);
                 }
-
-                currentTemp = therm_Read();
+                currentTemp = pilotValve_Close();
             }
 
             spark_Off();
