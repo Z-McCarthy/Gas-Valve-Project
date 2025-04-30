@@ -42,9 +42,12 @@ bool thermostat_Read() { return (P1IN & THERMOSTAT_PIN); }
 // === ADC READ HELPERS ===
 int16_t readADC(uint8_t channel)
 {
+    ADCCTL0 &= ADCENC;                       //Enabe ADC 
+    ADCMCTL = ADCMEM0;                      //Enable ADC Control
     ADCCTL0 &= ~ADCENC;                     // Disable ADC
     ADCMCTL0 = channel;                     // Select channel
     ADCCTL0 |= ADCENC | ADCSC;              // Enable and start
+    ADCCTL &= ~
     while (ADCCTL1 & ADCBUSY);              // Wait for finish
     return ADCMEM0;
 }
